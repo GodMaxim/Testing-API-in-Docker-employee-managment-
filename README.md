@@ -1,7 +1,6 @@
 # Employee Management API — Testing & CI/CD Guide
-```text
 A professional suite of smoke and integration tests for the employee-management-api-app backend application built with Node.js, Express, Sequelize, and PostgreSQL, running in an isolated Docker environment.
-```
+
 
  ## 🛠 Tech Stack
 * Runtime: Node.js
