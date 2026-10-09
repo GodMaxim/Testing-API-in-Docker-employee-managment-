@@ -162,7 +162,7 @@ describe('Smoke Tests', () => {
         }
     });
 
-     it('5. Should reject registration with unsupported multilingual/special characters if not allowed', async () => {
+     it('5. Should successfully register a user with valid multilingual (Unicode) names', async () => {
         const res = await request(app)
         .post('/register')
         .send({
@@ -182,7 +182,7 @@ describe('Smoke Tests', () => {
             
             expect([200, 201]).to.include(res.status);
             
-            const createdUser = await db.User.findOne({ where: { email: 'multilingual_user@example.com' } });
+            const createdUser = await db.User.findOne({ where: { email: 'unicode_user@example.com' } });
             expect(createdUser).to.not.be.null;
             expect(createdUser.firstName).to.equal('Александр');
             expect(createdUser.lastName).to.equal('李四');
