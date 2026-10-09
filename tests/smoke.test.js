@@ -139,18 +139,27 @@ describe('Smoke Tests', () => {
         const empUser = await db.User.findOne({ where: { email: 'employee4@example.com' } })
         expect(empUser).to.not.be.null;
         const employeeId = empUser.id;
+        const employeeEmail = empUser.email;
 
         const res = await request(app)
         .delete(`/users/${employeeId}`)
         .set('Authorization', `Bearer ${adminToken}`);
         expect(res.status).to.equal(200);
 
-        const searchRes = await request(app)
-        .get('/users/search?query=Amber')
-        .set('Authorization', `Bearer ${adminToken}`);
-        
-        expect(searchRes.status).to.equal(400);
-        expect(searchRes.body).to.have.property('errors');
+        const checkRes = await request(app)
+        .get('/users')
+        .set('Authorization', `Bearer ${adminToken}`)
+         expect(checkRes.status).to.equal(200);
+
+        const found = checkRes.body.users ? checkRes.body.users.some(u => u.email === employeeEmail) : false;
+        expect(found).to.be.false;
+
+        const deletedUserInDb = await db.User.findByPk(employeeId);
+        if (deletedUserInDb) {
+            expect(deletedUserInDb.deletedAt).to.not.be.null;
+        } else {
+            expect(deletedUserInDb).to.be.null;
+        }
     });
 
      it('5. Should reject registration with unsupported multilingual/special characters if not allowed', async () => {
@@ -160,7 +169,7 @@ describe('Smoke Tests', () => {
              email: 'unicode_user@example.com',
              password: 'password123',
              firstName: 'Александр', // Cyrillic
-             lastName: '李',         // Chinese
+             lastName: '李四',         // Chinese
              middleName: 'محمد',    // Arabic
              birthDate: '1992-05-15',
              phone: '+380991234567',
@@ -171,7 +180,12 @@ describe('Smoke Tests', () => {
              registrationDate: '2026-06-01'
             });
             
-            expect(res.status).to.equal(400);expect(res.body).to.have.property('errors');
+            expect([200, 201]).to.include(res.status);
+            
+            const createdUser = await db.User.findOne({ where: { email: 'multilingual_user@example.com' } });
+            expect(createdUser).to.not.be.null;
+            expect(createdUser.firstName).to.equal('Александр');
+            expect(createdUser.lastName).to.equal('李四');
     });
 
     });

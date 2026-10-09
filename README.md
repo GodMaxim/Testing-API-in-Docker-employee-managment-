@@ -24,7 +24,7 @@ To run the tests in the exact same environment as production or CI, use Docker:
 - docker exec -it my_app npm test
 
 ## CI/CD (GitHub Actions)
-The project features an automated CI/CD pipeline (.github/workflows/ci.yml) triggered on every push or Pull Request to the main and develop branches.
+The project features an automated CI/CD pipeline (.github/workflows/test.yml) triggered on every push or Pull Request to the main and develop branches.
 
 * Pipeline Workflow:
 - Sets up environment files (.env and .env.test).
