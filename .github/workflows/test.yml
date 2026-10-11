@@ -19,13 +19,13 @@ jobs:
           cp .env.test.example .env.test
           cp .env.example .env
 
-      - name: Run tests with Docker Compose
+      - name: Run E2E Tests with Docker Compose
         run: |
-          docker compose --profile ci up --abort-on-container-exit --exit-code-from test
+          docker compose --profile ci --profile e2e up --abort-on-container-exit --exit-code-from playwright
 
       - name: Cleanup
         if: always()
-        run: docker compose --profile ci down -v
+        run: docker compose --profile ci --profile e2e down -v
 
       - name: Remove node_modules created by Docker
         if: github.ref == 'refs/heads/main'

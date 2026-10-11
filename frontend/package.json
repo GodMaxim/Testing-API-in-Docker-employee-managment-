@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test:e2e": "playwright test"
+    "test": "npx playwright test"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.36.0",
+    "@playwright/test": "^1.64.0",
     "@tailwindcss/postcss": "^4.1.16",
     "@types/react": "^19.1.16",
     "@types/react-dom": "^19.1.9",

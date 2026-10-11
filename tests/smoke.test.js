@@ -60,7 +60,7 @@ describe('Smoke Tests', () => {
         lastName: 'Smith',
         middleName: 'Middle',
         birthDate: '1992-02-02',
-        phone: '+987654321',
+        phone: '+563154321',
         programmingLanguage: 'Python',
         country: 'UK',
         mentorName: 'Mentor B',
