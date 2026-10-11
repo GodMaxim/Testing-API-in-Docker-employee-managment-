@@ -35,6 +35,7 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+    command: npm run dev -- --host
 
   db:
     image: postgres:16

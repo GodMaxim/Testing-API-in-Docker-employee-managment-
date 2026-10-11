@@ -9,7 +9,7 @@ test.describe('Login page UI test', () => {
   test.beforeEach (async ({ page }) => {
     loginPage = new LoginPage(page)
     registerPage = new RegisterPage(page)
-    await page.goto('http://localhost:5173');
+    await page.goto('/')
   });
 
   test('should load the login page and show form elements', async () => {
