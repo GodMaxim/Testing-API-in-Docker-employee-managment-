@@ -2,11 +2,18 @@ FROM mcr.microsoft.com/playwright:v1.40.0-jammy
 
 WORKDIR /app
 
+RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs
+
 COPY package*.json ./
+
 RUN npm ci
+
+# Устанавливаем браузеры Playwright
 RUN npx playwright install --with-deps
 
 COPY . .
 
 EXPOSE 5173
+
 CMD ["npx", "playwright", "test"]
