@@ -27,13 +27,13 @@ To run the tests in the exact same environment as production or CI, use Docker:
 
 - **Backend Tests:**
   - Execute a specific test file inside the running container:
-    `docker exec -it my_app npx mocha tests/smoke.test.js`
+    `docker exec -it my_test npx mocha tests/smoke.test.js`
   - Or run the entire backend test suite via the npm script:
-    `docker exec -it my_app npm test`
+    `docker exec -it my_test npm test`
 
 - **Frontend E2E Tests (Playwright):**
   - Run the E2E UI tests in an isolated Docker container using the `e2e` profile:
-    `docker compose --profile ci --profile e2e up --abort-on-container-exit --exit-code-from playwright`
+    `docker compose --profile e2e up --abort-on-container-exit --exit-code-from playwright`
 
 ### 2. Locally (Directly on Host)
 If you want to run frontend tests directly from your local environment (e.g., inside `frontend/` directory):
