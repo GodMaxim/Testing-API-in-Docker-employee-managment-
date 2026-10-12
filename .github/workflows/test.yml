@@ -21,11 +21,11 @@ jobs:
           cp .env.e2e.example .env.e2e
 
       - name: Run Backend Tests (CI)
-        run: docker compose --profile ci up --build --abort-on-container-exit --exit-code-from my_test
+        run: docker compose --profile ci up --build --abort-on-container-exit --exit-code-from test
 
       - name: Run E2E Playwright Tests
         run: docker compose --profile e2e up --build --abort-on-container-exit --exit-code-from playwright
-
+        
       - name: Cleanup
         if: always()
         run: docker compose --profile ci --profile e2e down -v
